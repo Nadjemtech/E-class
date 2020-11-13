@@ -19,3 +19,10 @@ def LessonsList(request,pk):
     lessons = course.lesson_set.all()
     context = {'lessons': lessons}
     return render(request,'Courses/lesson_list.html',context)
+
+
+def LessonView(request,C_id,L_id):
+    course = Course.objects.get(id=C_id)
+    lesson = course.lesson_set.get(id=L_id)
+    context = {'lesson': lesson}
+    return render(request,'Courses/lesson_review.html',context)

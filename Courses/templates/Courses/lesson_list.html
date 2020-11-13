@@ -1,21 +1,131 @@
-{% extends "base.html" %}
 
 
-{% block content %}
+{% load static %}
 
-    {% for lesson in lessons %}
-      <p>{{lesson.lesson_name}}</p>
-    {% endfor %}    
-  <!-- <div class="card">
-      <img class="card-img-top" data-src="holder.js/100x180/?text=Image cap" alt="Card image cap">
-      <div class="card-body">
-          <h4 class="card-title">Title</h4>
-          <p class="card-text">Text</p>
-      </div>
-      <ul class="list-group list-group-flush">
-          <li class="list-group-item">Item 1</li>
-          <li class="list-group-item">Item 2</li>
-          <li class="list-group-item">Item 3</li>
-      </ul>
-  </div> -->
-{% endblock content %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "/css/timeline.css" %}">
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+      <div class="row d-flex justify-content-center mt-70 mb-70">
+    <div class="col-md-6">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">User Timeline</h5>
+                <div class="vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
+                  {% for lesson in lessons %}
+                    
+                    
+                  
+                  <div class="vertical-timeline-item vertical-timeline-element">
+                        <div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-warning"> </i> </span>
+                            <div class="vertical-timeline-element-content bounce-in">
+                                <h4 class="timeline-title"><a href="{% url 'LessonView' lesson.course_of.id lesson.id %}">{{lesson.lesson_name}}</a></h4>
+                                <p>Meeting with USA Client, today at <a href="javascript:void(0);" data-abc="true">{{lesson.order}}</a></p> <span class="vertical-timeline-element-date">9:30 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}  
+                    <div class="vertical-timeline-item vertical-timeline-element">
+                        <div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-warning"> </i> </span>
+                            <div class="vertical-timeline-element-content bounce-in">
+                                <p>Another meeting with UK client today, at <b class="text-danger">3:00 PM</b></p>
+                                <p>Yet another one, at <span class="text-success">5:00 PM</span></p> <span class="vertical-timeline-element-date">12:25 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vertical-timeline-item vertical-timeline-element">
+                        <div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-danger"> </i> </span>
+                            <div class="vertical-timeline-element-content bounce-in">
+                                <h4 class="timeline-title">Discussion with team about new product launch</h4>
+                                <p>meeting with team mates about the launch of new product. and tell them about new features</p> <span class="vertical-timeline-element-date">6:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vertical-timeline-item vertical-timeline-element">
+                        <div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-primary"> </i> </span>
+                            <div class="vertical-timeline-element-content bounce-in">
+                                <h4 class="timeline-title text-success">Discussion with marketing team</h4>
+                                <p>Discussion with marketing team about the popularity of last product</p> <span class="vertical-timeline-element-date">9:00 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vertical-timeline-item vertical-timeline-element">
+                        <div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-success"> </i> </span>
+                            <div class="vertical-timeline-element-content bounce-in">
+                                <h4 class="timeline-title">Purchase new hosting plan</h4>
+                                <p>Purchase new hosting plan as discussed with development team, today at <a href="javascript:void(0);" data-abc="true">10:00 AM</a></p> <span class="vertical-timeline-element-date">10:30 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vertical-timeline-item vertical-timeline-element">
+                        <div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-warning"> </i> </span>
+                            <div class="vertical-timeline-element-content bounce-in">
+                                <p>Another conference call today, at <b class="text-danger">11:00 AM</b></p>
+                                <p>Yet another one, at <span class="text-success">1:00 PM</span></p> <span class="vertical-timeline-element-date">12:25 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vertical-timeline-item vertical-timeline-element">
+                        <div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-warning"> </i> </span>
+                            <div class="vertical-timeline-element-content bounce-in">
+                                <p>Another meeting with UK client today, at <b class="text-danger">3:00 PM</b></p>
+                                <p>Yet another one, at <span class="text-success">5:00 PM</span></p> <span class="vertical-timeline-element-date">12:25 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vertical-timeline-item vertical-timeline-element">
+                        <div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-danger"> </i> </span>
+                            <div class="vertical-timeline-element-content bounce-in">
+                                <h4 class="timeline-title">Discussion with team about new product launch</h4>
+                                <p>meeting with team mates about the launch of new product. and tell them about new features</p> <span class="vertical-timeline-element-date">6:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vertical-timeline-item vertical-timeline-element">
+                        <div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-primary"> </i> </span>
+                            <div class="vertical-timeline-element-content bounce-in">
+                                <h4 class="timeline-title text-success">Discussion with marketing team</h4>
+                                <p>Discussion with marketing team about the popularity of last product</p> <span class="vertical-timeline-element-date">9:00 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vertical-timeline-item vertical-timeline-element">
+                        <div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-success"> </i> </span>
+                            <div class="vertical-timeline-element-content bounce-in">
+                                <h4 class="timeline-title">Purchase new hosting plan</h4>
+                                <p>Purchase new hosting plan as discussed with development team, today at <a href="javascript:void(0);" data-abc="true">10:00 AM</a></p> <span class="vertical-timeline-element-date">10:30 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vertical-timeline-item vertical-timeline-element">
+                        <div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-warning"> </i> </span>
+                            <div class="vertical-timeline-element-content bounce-in">
+                                <p>Another conference call today, at <b class="text-danger">11:00 AM</b></p>
+                                <p>Yet another one, at <span class="text-success">1:00 PM</span></p> <span class="vertical-timeline-element-date">12:25 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+
