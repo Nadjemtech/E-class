@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+          display: grid;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          background: #fc4a1a;
+          background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);
+          background: linear-gradient(to right, #f7b733, #fc4a1a)
+                  }
+        .content{
+          position: relative;
+          background-color: #fff;
+          margin: 0px;
+          justify-content: center;
+          align-items: center;
+          padding: 15%;
+          box-shadow:10px 10px 10px orangered;
+        }
+                  .form-group {
+              margin-top: 12px;
+              position: relative
+          }
+
+          .form-group input {
+              border: 2px solid #eee;
+              padding: 0 10px
+          }
+
+          .form-group input:focus {
+              color: #495057;
+              background-color: #fff;
+              border-color: none;
+              outline: 0;
+              box-shadow: none;
+              border: 2px solid #0d6efd
+          }
+
+          
+
+    </style>
+    </head>
+  <body>
+     <div class="content">
+       <h2>Update Course</h2>
+       <div class="alert alert-info" role="alert">
+         <strong>Here you can update your Course</strong>
+         <br>
+         <strong>the name, description and category should be add</strong>
+       </div>
+     
+
+
+       <form action="#" method="POST" class="was-validated">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="name">Course name:</label>
+              {{form.name}}
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+          <label for="description">Course Description:</label>
+          {{form.description}}          
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+          <label for="categoty">Course Category:</label>
+          {{form.category}}
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+          <label for="image">Image:</label>
+          {{form.image}}
+        </div>
+        <div class="form-group">
+          <label for="Teacher">Teacher:</label>
+          {{form.teacher}}
+        </div>
+        <div class="form-group">
+          <label for="Theme">Theme</label>
+          {{form.theme}}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form> 
+    </div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from .models import Lesson , Course , Category
+from .forms import *
 
 # Create your views here.
 def CoursesList(request):
@@ -26,3 +27,30 @@ def LessonView(request,C_id,L_id):
     lesson = course.lesson_set.get(id=L_id)
     context = {'lesson': lesson}
     return render(request,'Courses/lesson_review.html',context)
+
+
+def AddCourseView(request):
+    form = CourseForm()
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+
+        if form.is_valid() :
+            form.save()
+            return redirect('/')
+    context={'form':form} 
+          # do something.
+    return render(request , 'Courses/AddCourse.html',context)
+
+
+def UpdateCourseView(request , pk):
+    course = Course.objects.get(id =pk)
+    form = CourseForm( instance=course )
+    if request.method == 'POST':
+        form = CourseForm(request.POST , instance=course)
+        if form.is_valid() :
+            form.save()
+            return redirect('/')
+
+    context={'form':form} 
+          # do something.
+    return render(request , 'Courses/UpdateCourse.html',context)

@@ -4,7 +4,10 @@ from .models import Student
 
 
 def StudentInfo(request):
-    student = Student.objects.get(id=2)
+    student = Student.objects.first()
     courses = student.coursesRolling.all()
     context = {'student': student, 'courses':courses}
     return render(request , 'Student/student_profile.html',context)
+
+
+# def UpdateStudent(request , S_id):
