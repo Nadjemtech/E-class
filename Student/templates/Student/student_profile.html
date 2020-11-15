@@ -38,13 +38,13 @@
 </div>
 <div class="col-8">
     
-<p>Name :</p>
-<p>Last Name    :</p>
-<p>Phone    :</p>
-<p>address  :</p>
-<p>email    :</p>
-<p>age  :</p>
-<p>study year   :</p>
+<p>Name :</p><strong>{{student.name}}</strong
+<p>Last Name    :</p><strong>{{student.lastName}}</strong>
+<p>Gender    :</p><strong>{{student.gender}}</strong>
+<p>address  :</p><strong>{{student.address}}</strong>
+<p>email    :</p><strong>student@gmail.com</strong>
+<p>age  :</p><strong>{{student.age}}</strong>
+<p>study year   :</p><strong>{{student.study_year}}</strong>
 <a name="update" id="update" class="btn btn-warning" href="#" role="button">UpDate Profile</a>
 
 </div>
@@ -55,18 +55,14 @@
 
 </div>
 <ul class="list-group">
+    
+    {% for course in courses %} 
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        Active list item
-        <a href=""><span class="badge badge-primary badge-pill">Start</span></a>
+        {{course.name}}
+        <a href="{% url 'CourseReview' course.id %}"><span class="badge badge-primary badge-pill">Start</span></a>
     </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        List item
-        <a href=""><span class="badge badge-secondary badge-pill">Start</span></a>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center disabled">
-        Disabled item
-        <a href=""><span class="badge badge-secondary badge-pill">Start</span></a>
-    </li>
+    {% endfor %}
+
 </ul>
 <hr>
 <hr><hr><hr>

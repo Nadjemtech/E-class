@@ -98,6 +98,8 @@
               <p class="card-text"> {{course.teacher}} </p>
 
               <a href="{% url 'CourseReview' course.id %}" class="btn btn-outline-primary">Roll IN</a>
+              <a href="{% url 'UpdateCourse' course.id %}" class="btn btn-outline-primary">Update Course</a>
+
             </div>
           </div>
         {% endfor %}
