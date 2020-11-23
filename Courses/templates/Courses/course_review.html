@@ -5,9 +5,12 @@
 <div class="container">
   
 <div class="card text-white bg-info">
-  <div class="card-img-body">
-  <img class="card-img-top" src="https://picsum.photos/500/230" alt="course_img">
-  <div class="card-body">
+    <div class="card-img-body">
+      {% if course.image.url != null %}
+        <img class="card-img-top" src="{{ course.image.url }}" alt="course_img">
+
+      {% endif %}
+    <div class="card-body">
     <h4 class="card-title">{{course.name}}</h4>
     <h6>Description</h6>
     <p class="card-text"> {{course.description}} </p>

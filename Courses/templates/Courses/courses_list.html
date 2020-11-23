@@ -83,14 +83,26 @@
         }
       }</style>
     <div class="container">
+        <form method="get">
+          {{ filter.form.as_p }}
+
+          <button type="submit" class="btn btn-outline-secondary">Search</button> 
+        </form>
         <div class="card-group vgr-cards">
         {% for course in courses %}
               
         
           <div class="card">
             <div class="card-img-body">
-            <img class="card-img" src="https://picsum.photos/500/230" alt="Card image cap">
-            </div>
+            <!-- <img class="card-img" src="https://picsum.photos/500/230" alt="Card image cap"> -->
+            
+            {% if course.image.url != null %}
+              <img class="card-img-top" src="{{ course.image.url }}" alt="course_img">
+
+            {% endif %}
+              
+
+          </div>
             <div class="card-body">
               <h4 class="card-title">{{ course.name }}</h4>
               <p class="card-text"> {{course.description}} </p>

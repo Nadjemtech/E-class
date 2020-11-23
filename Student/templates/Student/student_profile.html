@@ -45,7 +45,7 @@
 <p>email    :</p><strong>student@gmail.com</strong>
 <p>age  :</p><strong>{{student.age}}</strong>
 <p>study year   :</p><strong>{{student.study_year}}</strong>
-<a name="update" id="update" class="btn btn-warning" href="#" role="button">UpDate Profile</a>
+<a name="update" id="update" class="btn btn-warning" href="{% url 'Student_Update' student.id %}" role="button">UpDate Profile</a>
 
 </div>
 

@@ -1,8 +1,72 @@
-<div class="card text-left">
-  <img class="card-img-top" src="holder.js/100px180/" alt="">
-  <div class="card-body">
-    <h4 class="card-title">{{lesson.lesson_name}}</h4>
-    <span>{{lesson.order}}</span>
-    {{lesson.document | safe}}
+{% extends 'base.html' %}
+{% load embed_video_tags %}
+{% block content %}
+<div class="row">
+
+<!-- SideNav slide-out button -->
+<a href="#" data-activates="slide-out" class="btn btn-primary p-3 button-collapse"><i
+  class="fa fa-bars"></i></a>
+
+<!-- Sidebar navigation -->
+<div id="slide-out" class="side-nav fixed">
+<ul class="custom-scrollbar">
+  <!-- Logo -->
+  <li>
+    <a class="navbar-brand" href="#">E-Class</a>
+  </li>
+  <!--/. Logo -->
+  <!--Social-->
+  <li>
+    <h6>Teacher</h6>
+    <ul class="social">
+      <li><a href="#" class="icons-sm fb-ic"><i class="fa fa-facebook" aria-hidden="true"></i> </i></a></li>
+      <li><a href="#" class="icons-sm pin-ic"><i class="fa fa-pinterest"> </i></a></li>
+      <li><a href="#" class="icons-sm gplus-ic"><i class="fa fa-google-plus-g"> </i></a></li>
+      <li><a href="#" class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a></li>
+    </ul>
+  
+  <!--/Social-->
+  <!--Search Form-->
+
+  <!--/.Search Form-->
+  <!-- Side navigation links -->
+    <li>
+      <div class="list-group">
+        {% for ls in lessons %}
+        <a href="{% url 'LessonView' course.id ls.id %}" class="list-group-item list-group-item-action"> {{ls.lesson_name}} </a>
+        {% endfor %}
+      </div>
+    </li>
+  <!--/. Side navigation links -->
+</ul>
+<div class="sidenav-bg rgba-blue-strong"></div>
+</div>
+
+ 
+<!--/. Sidebar navigation -->
+
+<div class="col">
+  <!-- The video tag: -->
+  {% video lesson.video as my_video %}
+    URL: {{ my_video.url }}
+    Thumbnail: {{ my_video.thumbnail }}
+    Backend: {{ my_video.backend }}
+
+    {% video my_video "large" %}
+  {% endvideo %}
+    <div class="content">
+      <h3><span> {{lesson.order}} </span> {{lesson.lesson_name}} </h3>
+      <div class="documentation">
+        {{lesson.document | safe}}
+      </div>
+      <div>
+        <a name="next" id="next" class="btn btn-success" href="#" role="button">Next</a>
+        <a name="menu" id="menu" class="btn btn-secondary" href="{% url 'LessonsList' course.id %}" role="button">Lesson List</a>
+      </div>
+
+
+    </div>
   </div>
 </div>
+
+{% endblock content %}

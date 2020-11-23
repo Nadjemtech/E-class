@@ -1,5 +1,6 @@
 from django.db import models
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+from embed_video.fields import EmbedVideoField
 
 # Create your models here.
 class Category(models.Model):
@@ -56,8 +57,8 @@ class Lesson(models.Model):
     id              =models.AutoField(primary_key=True)
     order           =models.IntegerField(default='1',blank=True, null=True)
     lesson_name     =models.CharField(max_length=255,blank=True, null=True)
-    document        =RichTextField(blank=True, null=True)
-    video           =models.URLField(null=True , blank=True)
+    document        =RichTextUploadingField(blank=True, null=True)
+    video           =EmbedVideoField(null=True , blank=True)
     created_at      =models.DateTimeField(auto_now_add=True)
     updated_at      =models.DateTimeField(auto_now_add=True)
     course_of       =models.ForeignKey('Course',on_delete=models.CASCADE)
@@ -66,43 +67,58 @@ class Lesson(models.Model):
         return self.lesson_name
 
     
-
     class Meta:
         db_table = ''
         managed = True
         verbose_name = 'Lesson'
         verbose_name_plural = 'Lessons'
 
+class Examination(models.Model):
+    lesson = models.ForeignKey('Lesson', on_delete=models.CASCADE)
+    def __str__(self):
+        return 'Exam of '+self.lesson.name
+
+    class Meta:
+        db_table = ''
+        managed = True
+        verbose_name = 'Examination'
+        verbose_name_plural = 'Examinations'
+
 class Activity(models.Model):
-    id              =models.AutoField(primary_key=True)
-    question        =RichTextField(blank=True, null=True)
-    lesson          = models.ForeignKey('Lesson', on_delete=models.CASCADE)
-    add             =models.FileField(null=True , blank=True)
-    solution        =RichTextField(blank=True, null=True)
+
+    question        =RichTextUploadingField(blank=True, null=True)
+    exam            = models.ForeignKey('Examination',null=True, on_delete=models.CASCADE)
+    image           =models.ImageField(null=True , blank=True)
     explanation     = models.ForeignKey('Explanation', on_delete=models.CASCADE)
-    suggestions     = models.ForeignKey('Suggestion', on_delete=models.CASCADE)
-    
+    suggestions     = models.ForeignKey('Choices', on_delete=models.CASCADE)
     def __str__(self):
         return self.id
 
 
-class Suggestion(models.Model):
+class Choices(models.Model):
+    true    = 'true'
+    false   = 'false'
+    TYPE = [
+        (true,'true'),
+        (false,'false')
+    ]
 
-    id              =models.AutoField(primary_key=True)
+    content     =models.CharField(max_length=1000)
+    type        =models.CharField(max_length=10,choices=TYPE)
+    def __str__(self):
+        return self.type
 
-    Content         =RichTextField(blank=True, null=True)
-    
     class Meta:
         db_table = ''
         managed = True
-        verbose_name = 'Suggestion'
-        verbose_name_plural = 'Suggestions'
+        verbose_name = 'Choices'
+        verbose_name_plural = 'Choicess'
+
+
 
 class Explanation(models.Model):
-    id              =models.AutoField(primary_key=True)
-    explain         =RichTextField(blank=True, null=True)
-    document        =models.FileField(null=True , blank=True)
-    video           =models.URLField(null=True , blank=True)
+    explain         =RichTextUploadingField(blank=True, null=True)
+    video           =EmbedVideoField(null=True , blank=True)
     
     class Meta:
         db_table = ''

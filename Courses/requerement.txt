@@ -1,0 +1,4 @@
+django-embed-video
+pillow
+ckeditor
+django_filters

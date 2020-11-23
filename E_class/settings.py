@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-CKEDITOR_UPLOAD_PATH = "ckeditor_uploads/"
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Courses',
     'ckeditor',
+    'ckeditor_uploader',
     'Student',
+    'django_filters',
+    'embed_video',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +128,9 @@ MEDIA_URL = '/images/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR , 'static/images')
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKDITOR_UPLOAD_SLUGIFY_FILENAME = False

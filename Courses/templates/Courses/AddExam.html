@@ -52,48 +52,42 @@
     </head>
   <body>
      <div class="content">
-       <h2>Update your informations</h2>
+       <h2>Add Exam</h2>
        <div class="alert alert-info" role="alert">
-         
+         <strong>Here you can add your Lesson</strong>
          <br>
-         <strong>the name, last name should be add</strong>
+         <strong>the Course should be add</strong>
        </div>
      
 
 
-       <form action="#" method="POST" class="was-validated">
+       <form action="{% url 'AddLesson' %}" method="POST" class="was-validated">
         {% csrf_token %}
         <div class="form-group">
-          <label for="name">Your name:</label>
+          <label for="name">Lesson name:</label>
               {{form.name}}
           <div class="valid-feedback">Valid.</div>
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>
         <div class="form-group">
-          <label for="description">Your last name:</label>
-          {{form.lastName}}          
+          <label for="description">Lesson Of Course:</label>
+          {{form.description}}          
           <div class="valid-feedback">Valid.</div>
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>
         <div class="form-group">
-          <label for="image">Gender:</label>
-          {{form.gender}}
+          <label for="categoty">Lesson Order:</label>
+          {{form.category}}
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
         </div>
         <div class="form-group">
-          <label for="Teacher">Addrass:</label>
-          {{form.addrass}}
-        </div>
-        <div class="form-group">
-          <label for="Theme">Image:</label>
+          <label for="image">Video:</label>
           {{form.image}}
         </div>
         <div class="form-group">
-          <label for="Theme">Age:</label>
-          {{form.age}}
-        </div>
-        <div class="form-group">
-          <label for="Theme">Study year:</label>
-          {{form.study_year}}
+          <label for="Teacher">Documentation:</label>
+          {{form.teacher}}
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form> 

@@ -1,6 +1,5 @@
 from django.forms import ModelForm
-from .models import Category , Course , Lesson
-
+from .models import *
 class CategoryForm(ModelForm):
     """Form definition for Category."""
 
@@ -29,4 +28,38 @@ class LessonForm(ModelForm):
 
         model = Lesson
         fields = ('order','lesson_name','document','video','course_of')
+
+class ExamForm(ModelForm):
+    class Meta:
+        model = Examination
+        fields = ('lesson',)
+
+class ActivityForm(ModelForm):
+    """Form definition for Activity."""
+
+    class Meta:
+        """Meta definition for Activityform."""
+
+        model = Activity
+        fields = ('question','exam','image','explanation','suggestions')
+
+class ChoicesForm(ModelForm):
+    """Form definition for Choices."""
+
+    class Meta:
+        """Meta definition for Choicesform."""
+
+        model = Choices
+        fields = ('content','type')
+
+
+class ExplainForm(ModelForm):
+    """Form definition for Explain."""
+
+    class Meta:
+        """Meta definition for Explainform."""
+
+        model = Explanation
+        fields = ('explain','video')
+
 

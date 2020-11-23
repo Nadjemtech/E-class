@@ -15,11 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path , include
-from Courses.views import CoursesList, LessonsList, CourseReview , LessonView, AddCourseView ,UpdateCourseView
-from Student.views import StudentInfo
+from django.conf.urls.static import static
+from django.conf import settings
+from Courses.views import *
+from Student.views import *
 urlpatterns = [
+    path(r'ckeditor/',include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
-    path('', CoursesList, name='CoursesList'),
+    path('', HomeView, name='Home'),
+    path('course/', CoursesList, name='CoursesList'),
+    path('aboutus/', AboutUs, name='AboutUs'),
+    path('contactus/', ContactUs, name='ContactUs'),
+    path('how_study/', HowStudy, name='HowStudy'),
     # Course_app_URL
     path('course/',include([
         path('<str:pk>/', LessonsList, name='LessonsList'),
@@ -27,6 +34,12 @@ urlpatterns = [
         path('<int:C_id>/<int:L_id>/', LessonView, name='LessonView'),
         path('add_course',AddCourseView, name='AddCourse'),
         path('update_course/<int:pk>/',UpdateCourseView, name='UpdateCourse'),
+        path('<int:C_id>/add_lesson/', AddLesson, name='AddLesson'),
         ])),    # Student_app_URLS
     path('student/',StudentInfo, name='Student_Profile'),
+    path('student/update/<int:S_id>', UpdateStudent, name='Student_Update'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+

@@ -17,6 +17,7 @@
   </head>
   <body>
     {% include 'navbar.html' %}
+
       <div class="row d-flex justify-content-center mt-70 mb-70">
     <div class="col-md-6">
         <div class="main-card mb-3 card">
@@ -31,7 +32,7 @@
                         <div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-warning"> </i> </span>
                             <div class="vertical-timeline-element-content bounce-in">
                                 <h4 class="timeline-title"><a href="{% url 'LessonView' lesson.course_of.id lesson.id %}">{{lesson.lesson_name}}</a></h4>
-                                <p>Meeting with USA Client, today at <a href="javascript:void(0);" data-abc="true">{{lesson.order}}</a></p> <span class="vertical-timeline-element-date">9:30 AM</span>
+                                <p>{{lesson.course_of}}<a href="javascript:void(0);" data-abc="true">{{lesson.order}}</a></p> <span class="vertical-timeline-element-date">9:30 AM</span>
                             </div>
                         </div>
                     </div>
@@ -120,6 +121,7 @@
             </div>
         </div>
     </div>
+    <a name="" id="" class="btn btn-primary" href="{% url 'AddLesson' course.id %}" role="button">Add Lesson</a>
 </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
