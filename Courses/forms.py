@@ -41,7 +41,7 @@ class ActivityForm(ModelForm):
         """Meta definition for Activityform."""
 
         model = Activity
-        fields = ('question','exam','image','explanation','suggestions')
+        fields = ('question','image','exam')
 
 class ChoicesForm(ModelForm):
     """Form definition for Choices."""

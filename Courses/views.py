@@ -1,6 +1,7 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect , reverse
 from .models import Lesson , Course , Category
 from .forms import *
+from django.forms import inlineformset_factory
 from .filter import ProductFilter
 
 # Create your views here.
@@ -86,7 +87,64 @@ def AddLesson(request, C_id ):
         if form.is_valid() :
             print('DONNE DONNE')
             form.save()
-            return redirect('/')
+            last = Lesson.objects.last()
+
+            return redirect('Success_Lesson')
     context={'form':form,'course':course} 
             # do something.
     return render(request , 'Courses/AddLesson.html',context)
+
+
+
+def Success_Lesson(request):
+    ls = Lesson.objects.last()
+    exam =ls.examination_set.create(lesson=ls)
+    context={'lesson':ls ,'exam':exam}
+    return render(request , 'Courses/AddExam.html',context)
+
+
+def AddActivity(request,E_id):
+    E = Examination.objects.get(id=E_id)
+    activity_form = ActivityForm(initial={'exam': E})
+    explanation_form = ExplainForm()
+    suggestion_form1 = ChoicesForm()
+    suggestion_form2 = ChoicesForm()
+    suggestion_form3 = ChoicesForm()
+    suggestion_form4 = ChoicesForm()
+    if request.method == "POST":
+        activity_form = ActivityForm(request.POST)
+        explanation_form = ExplainForm(request.POST)
+        suggestion_form1 = ChoicesForm(request.POST)
+        suggestion_form2 = ChoicesForm(request.POST)
+        suggestion_form3 = ChoicesForm(request.POST)
+        suggestion_form4 = ChoicesForm(request.POST)
+
+        if activity_form.is_valid and explanation_form.is_valid and suggestion_form1.is_valid and suggestion_form2.is_valid and suggestion_form3.is_valid and suggestion_form4.is_valid :
+            print("KOKOKOKOKOKOKOKOK")
+            activity = activity_form.save(False)
+            explain = explanation_form.save()
+            choice1 = suggestion_form1.save()
+            choice2 = suggestion_form2.save()
+            choice3 = suggestion_form3.save()
+            choice4 = suggestion_form4.save()
+            activity.explanation = explain
+            activity.suggestions
+            activity.suggestions
+            activity.suggestions
+            activity.suggestions
+            activity.save()
+            print(activity)
+
+            # sugg = suggestion_form.save()
+            # expl = explanation_form.save()
+            # act  = activity_form.save(False)
+
+            # act.explanation= expl
+            # act.suggestions= sugg
+    context={'activity_form':activity_form,
+            'explanation_form':explanation_form,
+            'suggestion_form1':suggestion_form1,
+            'suggestion_form2':suggestion_form2,
+            'suggestion_form3':suggestion_form3,
+            'suggestion_form4':suggestion_form4 ,}
+    return render(request, 'Courses/AddActivity.html',context)

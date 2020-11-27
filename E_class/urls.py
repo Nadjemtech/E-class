@@ -35,6 +35,8 @@ urlpatterns = [
         path('add_course',AddCourseView, name='AddCourse'),
         path('update_course/<int:pk>/',UpdateCourseView, name='UpdateCourse'),
         path('<int:C_id>/add_lesson/', AddLesson, name='AddLesson'),
+        path('add_lesson/Succes/', Success_Lesson, name='Success_Lesson'),
+        path('add_exam/<int:E_id>', AddActivity, name='AddActivity'),
         ])),    # Student_app_URLS
     path('student/',StudentInfo, name='Student_Profile'),
     path('student/update/<int:S_id>', UpdateStudent, name='Student_Update'),

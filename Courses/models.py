@@ -76,7 +76,7 @@ class Lesson(models.Model):
 class Examination(models.Model):
     lesson = models.ForeignKey('Lesson', on_delete=models.CASCADE)
     def __str__(self):
-        return 'Exam of '+self.lesson.name
+        return 'Exam of '+self.lesson.lesson_name
 
     class Meta:
         db_table = ''

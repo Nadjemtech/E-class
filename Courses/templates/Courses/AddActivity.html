@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>I Am Methos</h1>
+<h4>{{Exam.id}}</h4>
+<form action="" method="POST">
+    {% csrf_token %}
+
+    <h3>Activity content</h3>
+      {{activity_form.exam.as_hidden}}   
+    <div class="form-group">
+      <label for="image">Your Question <i class="fa fa-question" aria-hidden="true"></i> : </label>
+      {{activity_form.media}}
+      {{activity_form.question | safe}}
+    </div>
+    <div class="form-group">
+      <label for="image">Your Image : </label>
+      {{activity_form.image}}
+    </div>
+    <br>
+    <h3>The explanation</h3>
+    <div class="form-group">
+      <label for="image">Your Explain : </label>
+      {{explanation_form.explain}}
+    </div>
+    <div class="form-group">
+      <label for="image">Your Video : </label>
+      {{explanation_form.video}}
+    </div>
+    
+    <br>
+    <h3>The Choises</h3>
+    <label for="choice1">Choice :</label>{{suggestion_form1.content}} <label for="type">Type :</label>{{suggestion_form1.type}} <br>
+    <label for="choice1">Choice :</label>{{suggestion_form2.content}} <label for="type">Type :</label>{{suggestion_form2.type}} <br>
+    <label for="choice1">Choice :</label>{{suggestion_form3.content}} <label for="type">Type :</label>{{suggestion_form3.type}} <br>
+    <label for="choice1">Choice :</label>{{suggestion_form4.content}} <label for="type">Type :</label>{{suggestion_form4.type}} <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+  
+{% endblock content %}
