@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from Courses.views import *
 from Student.views import *
+from Teacher.views import *
 urlpatterns = [
     path(r'ckeditor/',include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
@@ -38,9 +39,13 @@ urlpatterns = [
         path('add_lesson/Succes/', Success_Lesson, name='Success_Lesson'),
         path('add_exam/<int:E_id>', AddActivity, name='AddActivity'),
         ])),    # Student_app_URLS
-    path('student/',StudentInfo, name='Student_Profile'),
+    path('student/<int:S_id>',StudentInfo, name='Student_Profile'),
     path('student/update/<int:S_id>', UpdateStudent, name='Student_Update'),
-]
+    path('login/', LoginView, name='Login'),
+    path('logout/', LogoutView, name='Logout'),
+    path('register/', RegisterView, name='Register'),
+    path('Teacher/AddTeacher', AddTeacher , name='AddTeacher'),
+    path('Teacher/<int:T_id>', TeacherProfile, name='TeacherProfile'),]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     

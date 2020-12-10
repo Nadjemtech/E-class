@@ -10,7 +10,6 @@
       {{activity_form.exam.as_hidden}}   
     <div class="form-group">
       <label for="image">Your Question <i class="fa fa-question" aria-hidden="true"></i> : </label>
-      {{activity_form.media}}
       {{activity_form.question | safe}}
     </div>
     <div class="form-group">
@@ -30,10 +29,11 @@
     
     <br>
     <h3>The Choises</h3>
-    <label for="choice1">Choice :</label>{{suggestion_form1.content}} <label for="type">Type :</label>{{suggestion_form1.type}} <br>
-    <label for="choice1">Choice :</label>{{suggestion_form2.content}} <label for="type">Type :</label>{{suggestion_form2.type}} <br>
-    <label for="choice1">Choice :</label>{{suggestion_form3.content}} <label for="type">Type :</label>{{suggestion_form3.type}} <br>
-    <label for="choice1">Choice :</label>{{suggestion_form4.content}} <label for="type">Type :</label>{{suggestion_form4.type}} <br>
+    {{ choices_set.management_form }}
+    {% for choice in choices_set %}
+      <label for="choice1">Choice :</label>{{choice.content}} <label for="type">Type :</label>{{choice.type}} <br>
+      
+    {% endfor %}
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
   

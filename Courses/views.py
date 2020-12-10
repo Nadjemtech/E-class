@@ -1,8 +1,9 @@
 from django.shortcuts import render , redirect , reverse
 from .models import Lesson , Course , Category
 from .forms import *
-from django.forms import inlineformset_factory
+from django.forms import modelformset_factory
 from .filter import ProductFilter
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def HomeView(request):
@@ -32,14 +33,14 @@ def CourseReview(request,pk):
     context = {'course': course}
     return render(request,'Courses/course_review.html',context)
 
-
+@login_required(login_url='Login')
 def LessonsList(request,pk):
     course = Course.objects.get(id=pk)
     lessons = course.lesson_set.all()
     context = {'lessons': lessons , 'course':course}
     return render(request,'Courses/lesson_list.html',context)
 
-
+@login_required(login_url='Login')
 def LessonView(request,C_id,L_id):
     course = Course.objects.get(id=C_id)
     lesson = course.lesson_set.get(id=L_id)
@@ -49,7 +50,7 @@ def LessonView(request,C_id,L_id):
 
 
 
-
+@login_required(login_url='Login')
 def AddCourseView(request):
     form = CourseForm()
     if request.method == 'POST':
@@ -62,7 +63,7 @@ def AddCourseView(request):
           # do something.
     return render(request , 'Courses/AddCourse.html',context)
 
-
+@login_required(login_url='Login')
 def UpdateCourseView(request , pk):
     course = Course.objects.get(id =pk)
     form = CourseForm( instance=course )
@@ -76,7 +77,7 @@ def UpdateCourseView(request , pk):
           # do something.
     return render(request , 'Courses/UpdateCourse.html',context)
 
-
+@login_required(login_url='Login')
 def AddLesson(request, C_id ):
 
     course = Course.objects.get(id= C_id )
@@ -95,45 +96,37 @@ def AddLesson(request, C_id ):
     return render(request , 'Courses/AddLesson.html',context)
 
 
-
+@login_required(login_url='Login')
 def Success_Lesson(request):
     ls = Lesson.objects.last()
     exam =ls.examination_set.create(lesson=ls)
     context={'lesson':ls ,'exam':exam}
     return render(request , 'Courses/AddExam.html',context)
 
-
+@login_required(login_url='Login')
 def AddActivity(request,E_id):
     E = Examination.objects.get(id=E_id)
     activity_form = ActivityForm(initial={'exam': E})
     explanation_form = ExplainForm()
-    suggestion_form1 = ChoicesForm()
-    suggestion_form2 = ChoicesForm()
-    suggestion_form3 = ChoicesForm()
-    suggestion_form4 = ChoicesForm()
+    choices_set = modelformset_factory(Choices,exclude=('activity',), extra=4)
     if request.method == "POST":
         activity_form = ActivityForm(request.POST)
         explanation_form = ExplainForm(request.POST)
-        suggestion_form1 = ChoicesForm(request.POST)
-        suggestion_form2 = ChoicesForm(request.POST)
-        suggestion_form3 = ChoicesForm(request.POST)
-        suggestion_form4 = ChoicesForm(request.POST)
+        choices_set = choices_set(request.POST)
 
-        if activity_form.is_valid and explanation_form.is_valid and suggestion_form1.is_valid and suggestion_form2.is_valid and suggestion_form3.is_valid and suggestion_form4.is_valid :
+        if activity_form.is_valid and explanation_form.is_valid and choices_set.is_valid:
             print("KOKOKOKOKOKOKOKOK")
-            activity = activity_form.save(False)
-            explain = explanation_form.save()
-            choice1 = suggestion_form1.save()
-            choice2 = suggestion_form2.save()
-            choice3 = suggestion_form3.save()
-            choice4 = suggestion_form4.save()
-            activity.explanation = explain
-            activity.suggestions
-            activity.suggestions
-            activity.suggestions
-            activity.suggestions
-            activity.save()
-            print(activity)
+            activity = activity_form.save()
+            print("Activity SAVED")
+            explain = explanation_form.save(commit=False)
+            explain.activity = activity
+            explain.save()
+            print("EXPLAIN SAVED")
+            choices = choices_set.save(commit=False)
+            for choice in choices :
+                choice.activity = activity
+                choice.save()
+                print("CHOICE SAVED")
 
             # sugg = suggestion_form.save()
             # expl = explanation_form.save()
@@ -143,8 +136,6 @@ def AddActivity(request,E_id):
             # act.suggestions= sugg
     context={'activity_form':activity_form,
             'explanation_form':explanation_form,
-            'suggestion_form1':suggestion_form1,
-            'suggestion_form2':suggestion_form2,
-            'suggestion_form3':suggestion_form3,
-            'suggestion_form4':suggestion_form4 ,}
+            'choices_set':choices_set,
+            }
     return render(request, 'Courses/AddActivity.html',context)

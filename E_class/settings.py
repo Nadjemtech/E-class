@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Student',
     'django_filters',
     'embed_video',
+    'Teacher'
 ]
 
 MIDDLEWARE = [
