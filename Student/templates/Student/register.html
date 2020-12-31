@@ -24,26 +24,72 @@
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
-							{{form.username}}
+							{{formUser.username}}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 							</div>
-							{{form.email}}
+							{{formUser.email}}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-							{{form.password1}}
+							{{formUser.password1}}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-							{{form.password2}}
+							{{formUser.password2}}
 						</div>
+
+						<h4>personal information </h4>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text">First name :</span>
+							</div>
+							{{form.name}}
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text">Last name :</span>
+							</div>
+							{{form.lastName}}
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text">Gender :</span>
+							</div>
+							{{form.gender}}
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text">Address<i class="fas fa-home"></i> :</span>
+							</div>
+							{{form.addrass}}
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text">Your photo<i class="fas fa-camera"></i> :</span>
+							</div>
+							{{form.image}}
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text">Age :</span>
+							</div>
+							{{form.age}}
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text">Study Years<i class="fas fa-shopping-bag"></i> :</span>
+							</div>
+							{{form.study_year}}
+						</div>
+
+
 
 
 
@@ -54,6 +100,7 @@
 					</form>
 				</div>
 
+				{{formUser.errors}}
 				{{form.errors}}
 				
 				<div class="mt-4">

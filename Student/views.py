@@ -3,7 +3,7 @@ from .models import Student
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate , login , logout
 from django.contrib import messages
-from .forms import StudentForm , CreateStudent
+from .forms import StudentForm , CreateUserForm
 
 # Create your views here.
 
@@ -28,14 +28,19 @@ def LogoutView(request):
 	return redirect('Login')
 
 def RegisterView(request):
-    form = CreateStudent()
+    formUser = CreateUserForm()
+    form = StudentForm()
     if request.method=="POST":
-        form = CreateStudent(request.POST)
-        if form.is_valid() :
-            form.save()
+        formUser = CreateUserForm(request.POST)
+        form = StudentForm(request.POST)
+        if form.is_valid() and formUser.is_valid() :
+            user = formUser.save()
+            S = form.save(commit=False)
+            S.user = user
+            S.save()
             messages.success(request,'your Profile Created')
             return redirect('Login')
-    context = {'form':form}
+    context = {'form':form , 'formUser':formUser }
     return render(request,'Student/register.html',context)
 
 def StudentInfo(request,S_id):

@@ -1,2 +1,49 @@
-{% include "navbar.html" %}
-<h1>About us</h1>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    
+ 
+<section class="clean-block about-us">
+    <div class="caption v-middle text-center">
+        <h1 class="cd-headline clip"><span class="blc">We are a</span><span class="cd-words-wrapper"><b class="is-visible">Teachers</b><b>Classes</b><b>Lessons</b></span><span class="blinking">|</span></h1>
+    </div>
+    <div class="container">
+        <div class="block-heading">
+            <h2 class="text-info">About Us</h2>
+            <p>We are professionals teachers with big +10 years exprience in domean of eduction and e-learning </p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-6 col-lg-4">
+                <div class="card clean-card text-center"><img class="card-img-top w-100 d-block" src="avatars/avatar1.jpg" />
+                    <div class="card-body info">
+                        <h4 class="card-title">John Smith</h4>
+                        <p class="card-text">Teacher for 10 years in English </p>
+                        <div class="icons"><a href="#"><i class="icon-social-facebook"></i></a><a href="#"><i class="icon-social-instagram"></i></a><a href="#"><i class="icon-social-twitter"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="card clean-card text-center"><img class="card-img-top w-100 d-block" src="avatars/avatar2.jpg" />
+                    <div class="card-body info">
+                        <h4 class="card-title">Robert Downturn</h4>
+                        <p class="card-text">Doctor from CFD university in math&amp;physics</p>
+                        <div class="icons"><a href="#"><i class="icon-social-facebook"></i></a><a href="#"><i class="icon-social-instagram"></i></a><a href="#"><i class="icon-social-twitter"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="card clean-card text-center"><img class="card-img-top w-100 d-block" src="avatars/avatar3.jpg" />
+                    <div class="card-body info">
+                        <h4 class="card-title">Ally Sanders</h4>
+                        <p class="card-text">Psychologist of academy </p>
+                        <div class="icons"><a href="#"><i class="icon-social-facebook"></i></a><a href="#"><i class="icon-social-instagram"></i></a><a href="#"><i class="icon-social-twitter"></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="{% static '/js/test.js' %}"></script>
+
+{% endblock content %}
