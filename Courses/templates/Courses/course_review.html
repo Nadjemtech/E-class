@@ -1,30 +1,92 @@
-{% extends "base.html" %}
-{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="shadow  p-3 mb-5 bg-info !spacing ">  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static '/css/style.css' %}">
+  <link rel="stylesheet" href="{% static '/css/review.css' %}">
+</head>
+<body style="    background-image: url({% static "/images/bg4.png" %});">
+
+  {% include 'navbar.html' %}
+
+
+
+
 <div class="container">
   
-<div class="card text-white bg-info">
-    <div class="card-img-body">
+<div class="card">
+    <div>
       {% if course.image.url != null %}
         <img class="card-img-top" src="{{ course.image.url }}" alt="course_img">
 
       {% endif %}
     <div class="card-body">
-    <h4 class="card-title">{{course.name}}</h4>
-    <h6>Description</h6>
-    <p class="card-text"> {{course.description}} </p>
-    <hr>
-    <h6>rating</h6>
-    <p class="card-text"> {{course.rating}} </p>
-    <hr>
-    <h6>Teacher</h6>
-    <p class="card-text"> {{course.teacher}} </p>
+    <h2 class="card-title">{{course.name}}</h2>
+    <h5 class="card-text"> {{course.description}} </h5>
+    
+    <label for="">Rate :
+    {% for i in range %}
+      <i class="fa fa-star" aria-hidden="true"></i>
+    {% endfor %}
+    </label><br>
+       
+    
+    <label for="">Created by :<p class="card-text"> {{course.teacher}} </p></label><br>
+    <a href="{% url 'LessonsList' course.id %}" class="btn btn-outline-primary">Roll IN</a>
+    <a href=reviewlayout"{% url 'rate-course' course.id %}" class="btn btn-outline-primary review-btn"><i class="fa fa-comment" aria-hidden="true"></i> Add Review</a>
+    
   </div>
-  <a href="{% url 'LessonsList' course.id %}" class="btn btn-outline-primary">Roll IN</a>
-  </div>
+</div>
 
 </div>  
 </div>
+<!-- reviews list -->
+<div class="review-box">
+<ul class="list-group">
+  {% for review in reviews %}
+    <li class="list-group-item d-flex  ">
+      <div><i class="fa fa-user-circle" aria-hidden="true"></i>
+      <span> {{review.user}} </span>
+      </div>
+      <p> {{review.text}} </p>
+      
+      {% if review.like %}
+      <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+      {% else %}
+        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+      {% endif %}
+        
+    </li>
+  {% endfor %}
+</ul>
+
 </div>
-{% endblock content  %}
+
+{% if 'rate' in request.path %} 
+
+<div class="review">
+    <form  id action="" method="POST">
+      {% csrf_token %}
+      <ul class="list-group list-group-horizontal row">
+      <li class="list-group-item col-md-6">{{form.text}}</li>
+      <li class="list-group-item col-sm-2">{{form.rate}}</li>
+      <li class="list-group-item col-sm-2">{{form.like}}</li>
+<a type="submit" class="btn btn-primary" role="button">ADD</a>    </ul>
+      
+    </form>
+  </div>
+</ul>
+{% endif %}
+
+
+</div>
+{% include "footer.html" %}
+</body>
+</html>

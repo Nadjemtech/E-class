@@ -28,8 +28,8 @@ urlpatterns = [
     path('aboutus/', AboutUs, name='AboutUs'),
     path('contactus/', ContactUs, name='ContactUs'),
     path('how_study/', HowStudy, name='HowStudy'),
-    # Course_app_URL
     path('course/',include([
+        path('<C_id>/rate', Rate, name='rate-course'),
         path('<str:pk>/', LessonsList, name='LessonsList'),
         path('review/<str:pk>/', CourseReview, name='CourseReview'),
         path('<int:C_id>/<int:L_id>/', LessonView, name='LessonView'),

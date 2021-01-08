@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'Student',
     'django_filters',
     'embed_video',
-    'Teacher'
+    'Teacher',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +135,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR , 'static/images')
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_IMAGE_BACKEND = "pillow"
 CKDITOR_UPLOAD_SLUGIFY_FILENAME = False
+

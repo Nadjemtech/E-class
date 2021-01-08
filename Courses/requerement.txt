@@ -2,3 +2,7 @@ django-embed-video
 pillow
 ckeditor
 django_filters
+django-ratings
+django-star-ratings
+
+pip install pinax-ratings

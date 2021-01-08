@@ -1,123 +1,80 @@
-{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static '/css/style.css' %}">
+  <link rel="stylesheet" href=" {% static '/css/courses.css' %} ">
+</head>
+<body style=" background-color: rgb(230, 255, 247);">
+  {% include "navbar.html" %}
 
-
-
-{% block content %}
-  
-
-
-        
-   
-    <style>
-    body {
-        margin-top: 20px;
-      }
-      
-      // Bootstrap resets
-      .card {
-        border: none;
-      }
-      .card-img {
-        border-radius: 0;
-      }
-      
-      .vgr-cards {
-        .card {
-          display: flex;
-          flex-flow: wrap;
-          flex: 100%;
-          margin-bottom: 40px;
-      
-          &:nth-child(even) .card-img-body {
-            order: 2;
-          }
-      
-          &:nth-child(even) .card-body {
-            padding-left: 0;
-            padding-right: 1.25rem; 
-          }
-          
-          @media (max-width: 576px) {
-            display: block;
-          }
-          
-        }
-      
-        .card-img-body {
-          flex: 1;
-          overflow: hidden;
-          position: relative;
-          
-          @media (max-width: 576px) {
-            width: 100%;
-            height: 200px;
-                margin-bottom: 20px;
-          }
-          
-        }
-        
-        .card-img {
-          width: 100%;
-          height: auto;
-          position: absolute;
-          margin-left: 50%;
-          transform: translateX(-50%);
-          
-          @media (max-width: 1140px) {
-                margin: 0;
-          transform: none;
-          width: 100%;
-          height: auto;
-          }
-          
-        }
-      
-        .card-body {
-          flex: 2;
-          padding: 0 0 0 1.25rem;
-          
-          @media (max-width: 576px) {
-            padding: 0;
-          }
-          
-        }
-      }</style>
     <div class="container">
+
+      <div class="search-filter">
         <form method="get">
-          {{ filter.form.as_p }}
 
-          <button type="submit" class="btn btn-outline-secondary">Search</button> 
+          <label for="name">Course</label>{{filter.form.name}}
+
+
+          <div class="row">
+            <div class="col-sm-4"><label for="category">Level</label> {{filter.form.category}} </div>
+            <div class="col-sm-4"><label for="teacher">Teacher</label> {{filter.form.teacher}} </div>
+            <div class="col-sm-4"><label for="theme">Theme</label> {{filter.form.theme}} </div>
+          
+          </div>
+          <button id="search" type="submit" class="btn btn-outline-secondary"><i class="fa fa-search" aria-hidden="true"></i></button>
+
         </form>
-        <div class="card-group vgr-cards">
-        {% for course in courses %}
-              
-        
-          <div class="card">
-            <div class="card-img-body">
-            <!-- <img class="card-img" src="https://picsum.photos/500/230" alt="Card image cap"> -->
-            
-            {% if course.image.url != null %}
-              <img class="card-img-top" src="{{ course.image.url }}" alt="course_img">
-
-            {% endif %}
-              
-
-          </div>
-            <div class="card-body">
-              <h4 class="card-title">{{ course.name }}</h4>
-              <p class="card-text"> {{course.description}} </p>
-              <p class="card-text"> {{course.rating}} </p>
-              <p class="card-text"> {{course.teacher}} </p>
-
-              <a href="{% url 'CourseReview' course.id %}" class="btn btn-outline-primary">Roll IN</a>
-              <a href="{% url 'UpdateCourse' course.id %}" class="btn btn-outline-primary">Update Course</a>
-
-            </div>
-          </div>
-        {% endfor %}
-        
-        </div>
       </div>
- 
+        <ul class="list-group">
+
+          {% for course in courses %}
+
+          <li class="list-group-item" data-aos="fade-up"
+          data-aos-anchor-placement="bottom-bottom" data-aos-mirror="true">
+            <div class="card">
+              <div class="row no-gutters">
+                  <div class="col-sm-5" style="background: #868e96;">
+                    {% if course.image.url != null %}
+                      <img src=" {{course.image.url}} " class="card-img-top h-100" alt="...">
+                    {% endif %}
+                  </div>
+                  <div class="col-sm-7">
+                      <div class="card-body">
+                          <h5 class="card-title"> {{course.name}} </h5>
+                          <span> {{course.theme}} </span>
+                          <p>level :<strong> {{course.category}} </strong></p>
+                          <p class="card-text"> {{course.description}} </p>
+                          <a href="{% url 'CourseReview' course.id %}" class="btn btn-primary stretched-link">View Course</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </li>
+          {% endfor %}
+        </ul>
+      
     
-{% endblock content %}
+        <!-- SOCIAL PANEL HTML -->
+
+
+
+
+      </div>
+
+
+      {% include "footer.html" %}
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script>
+        AOS.init();
+      </script>
+    </body>
+    </html>
+    

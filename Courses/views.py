@@ -1,10 +1,9 @@
-from django.shortcuts import render , redirect , reverse
+from django.shortcuts import render , redirect , reverse ,HttpResponseRedirect
 from .models import Lesson , Course , Category
 from .forms import *
 from django.forms import modelformset_factory
 from .filter import ProductFilter
 from django.contrib.auth.decorators import login_required
-
 # Create your views here.
 def HomeView(request):
     return render(request , 'home.html')
@@ -18,7 +17,24 @@ def ContactUs(request):
 def HowStudy(request):
     return render(request , 'how_study.html')
 
-
+#review
+@login_required(login_url='Login')
+def Rate(request, C_id):
+    course = Course.objects.get(id=C_id)
+    reviews = course.review_set.all()
+    user = request.user
+    if request.method == 'POST':
+        form = RateForm(request.POST)
+        if form.is_valid():
+            rate = form.save(commit=False)
+            rate.user = user
+            rate.course = course
+            rate.save()
+            return HttpResponseRedirect(reverse('CourseReview', args=[C_id]))
+    else:
+        form = RateForm()
+    context = {'form': form,'course': course,'reviews':reviews}
+    return render(request,'Courses/course_review.html',context)
 
 def CoursesList(request):
     courses = Course.objects.all()
@@ -30,7 +46,14 @@ def CoursesList(request):
 
 def CourseReview(request,pk):
     course = Course.objects.get(id=pk)
-    context = {'course': course}
+    reviews = course.review_set.all()
+    liked = reviews.filter(like=True).count()
+    num = reviews.count()
+    rating = (liked*5)//num
+    course.rating=rating
+    course.save
+    rng = range(rating)
+    context = {'course': course,'reviews':reviews,'range':rng ,}
     return render(request,'Courses/course_review.html',context)
 
 @login_required(login_url='Login')

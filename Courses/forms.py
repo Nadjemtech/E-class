@@ -1,4 +1,6 @@
 from django.forms import ModelForm
+
+from django import forms
 from .models import *
 class CategoryForm(ModelForm):
     """Form definition for Category."""
@@ -62,4 +64,12 @@ class ExplainForm(ModelForm):
         model = Explanation
         fields = ('explain','video')
 
+
+class RateForm(ModelForm):
+	text = forms.CharField(widget=forms.Textarea(attrs={'class': 'review-text'}), required=False)
+	rate = forms.ChoiceField(choices=RATE_CHOICES, widget=forms.Select(), required=True)
+
+	class Meta:
+		model = Review
+		fields = ('text', 'rate','like')
 
